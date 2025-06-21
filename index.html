@@ -375,11 +375,29 @@
         
         /* Настройки */
         .settings-container {
-            background: white;
+            background: var(--card-bg);
             border-radius: 10px;
             padding: 15px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             margin-top: 15px;
+        }
+        
+        .settings-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .settings-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .settings-section h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary);
         }
         
         .color-options {
@@ -407,11 +425,36 @@
             transform: scale(1.1);
         }
         
+        .language-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .language-btn {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid var(--border);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .language-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
         .reset-btn {
+            width: 100%;
             background: var(--accent);
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 12px;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
@@ -422,6 +465,82 @@
         .reset-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Чит-код панель */
+        .cheat-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            max-width: 90%;
+            width: 300px;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .cheat-panel h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .cheat-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+        }
+        
+        .cheat-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .cheat-submit:hover {
+            background: var(--secondary);
+        }
+        
+        .cheat-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        .cheat-message {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .cheat-success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+        }
+        
+        .cheat-error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #c0392b;
         }
         
         /* Адаптация для очень маленьких экранов */
@@ -546,595 +665,4 @@
                     <button class="upgrade-btn" id="autoClicker3">Купить</button>
                 </div>
                 
-                <!-- Премиум улучшения -->
-                <div class="upgrade premium">
-                    <div class="upgrade-header">
-                        <span class="upgrade-name premium">Клик-шторм</span>
-                        <span class="upgrade-cost premium">25,000</span>
-                    </div>
-                    <div class="upgrade-desc">Автокликеры работают в 2 раза быстрее</div>
-                    <div class="premium-progress">
-                        <div class="premium-progress-bar" id="clickStormProgress"></div>
-                    </div>
-                    <button class="upgrade-btn premium" id="clickStorm">Купить</button>
-                </div>
-                
-                <div class="upgrade premium">
-                    <div class="upgrade-header">
-                        <span class="upgrade-name premium">Критический удар</span>
-                        <span class="upgrade-cost premium">15,000</span>
-                    </div>
-                    <div class="upgrade-desc">10% шанс получить 5x очков за клик</div>
-                    <div class="premium-progress">
-                        <div class="premium-progress-bar" id="criticalHitProgress"></div>
-                    </div>
-                    <button class="upgrade-btn premium" id="criticalHit">Купить</button>
-                </div>
-                
-                <div class="upgrade premium">
-                    <div class="upgrade-header">
-                        <span class="upgrade-name premium">Золотая лихорадка</span>
-                        <span class="upgrade-cost premium">50,000</span>
-                    </div>
-                    <div class="upgrade-desc">Все очки увеличиваются на 25%</div>
-                    <div class="premium-progress">
-                        <div class="premium-progress-bar" id="goldRushProgress"></div>
-                    </div>
-                    <button class="upgrade-btn premium" id="goldRush">Купить</button>
-                </div>
-                
-                <div class="upgrade premium">
-                    <div class="upgrade-header">
-                        <span class="upgrade-name premium">Бесконечный клик</span>
-                        <span class="upgrade-cost premium">100,000</span>
-                    </div>
-                    <div class="upgrade-desc">Автокликеры работают в 10 раз быстрее</div>
-                    <div class="premium-progress">
-                        <div class="premium-progress-bar" id="infinityClickProgress"></div>
-                    </div>
-                    <button class="upgrade-btn premium" id="infinityClick">Купить</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-content" id="stats-tab">
-            <h2>Статистика</h2>
-            <div class="stats-container">
-                <div class="stat">
-                    <span class="stat-name">Всего очков:</span>
-                    <span class="stat-value" id="totalPoints">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-name">Всего кликов:</span>
-                    <span class="stat-value" id="totalClicks">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-name">Очков с кликов:</span>
-                    <span class="stat-value" id="pointsFromClicks">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-name">Очков автоматически:</span>
-                    <span class="stat-value" id="pointsFromAuto">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-name">Критических ударов:</span>
-                    <span class="stat-value" id="criticalHits">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-name">Время игры:</span>
-                    <span class="stat-value" id="playTime">0:00</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-name">Общий множитель:</span>
-                    <span class="stat-value" id="totalMultiplier">1x</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-content" id="settings-tab">
-            <h2>Настройки</h2>
-            <div class="settings-container">
-                <h3>Цветовая тема</h3>
-                <div class="color-options">
-                    <div class="color-option selected" data-color="purple" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);"></div>
-                    <div class="color-option" data-color="blue" style="background: linear-gradient(135deg, #3498db, #2980b9);"></div>
-                    <div class="color-option" data-color="green" style="background: linear-gradient(135deg, #2ecc71, #27ae60);"></div>
-                    <div class="color-option" data-color="red" style="background: linear-gradient(135deg, #e74c3c, #c0392b);"></div>
-                    <div class="color-option" data-color="orange" style="background: linear-gradient(135deg, #e67e22, #d35400);"></div>
-                    <div class="color-option" data-color="pink" style="background: linear-gradient(135deg, #e84393, #fd79a8);"></div>
-                </div>
-                
-                <h3>Управление игрой</h3>
-                <button class="reset-btn" id="resetProgress">Сбросить прогресс</button>
-                <div class="stat" style="margin-top: 15px;">
-                    <span class="stat-name">Автосохранение:</span>
-                    <span class="stat-value" id="lastSave">Никогда</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Запрет масштабирования жестами
-        document.addEventListener('gesturestart', function(e) {
-            e.preventDefault();
-        });
-        
-        // Инициализация Telegram WebApp и открытие на весь экран
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.enableClosingConfirmation();
-        
-        // Цветовые схемы
-        const colorSchemes = {
-            purple: { primary: '#8e44ad', secondary: '#9b59b6', accent: '#e74c3c' },
-            blue: { primary: '#3498db', secondary: '#2980b9', accent: '#e74c3c' },
-            green: { primary: '#2ecc71', secondary: '#27ae60', accent: '#e74c3c' },
-            red: { primary: '#e74c3c', secondary: '#c0392b', accent: '#3498db' },
-            orange: { primary: '#e67e22', secondary: '#d35400', accent: '#3498db' },
-            pink: { primary: '#e84393', secondary: '#fd79a8', accent: '#3498db' }
-        };
-        
-        // Игровые переменные
-        let gameState = {
-            score: 0,
-            totalClicks: 0,
-            pointsFromClicks: 0,
-            pointsFromAuto: 0,
-            criticalHits: 0,
-            playTime: 0,
-            totalPoints: 0,
-            clickPower: 1,
-            autoClickers: 0,
-            autoClickPower: 1,
-            globalMultiplier: 1,
-            colorScheme: 'purple',
-            upgrades: {
-                clickPower1: { owned: false },
-                clickPower2: { owned: false },
-                clickPower3: { owned: false },
-                autoClicker1: { owned: false },
-                autoClicker2: { owned: false },
-                autoClicker3: { owned: false },
-                clickStorm: { progress: 0 },
-                criticalHit: { progress: 0 },
-                goldRush: { progress: 0 },
-                infinityClick: { progress: 0 }
-            }
-        };
-        
-        // Загрузка сохраненной игры
-        function loadGame() {
-            const savedGame = localStorage.getItem('laBertoClicker');
-            if (savedGame) {
-                try {
-                    const parsed = JSON.parse(savedGame);
-                    Object.assign(gameState, parsed);
-                    
-                    // Обновляем время последнего сохранения
-                    updateLastSaveTime();
-                    
-                    // Применяем цветовую схему
-                    applyColorScheme(gameState.colorScheme);
-                    
-                    return true;
-                } catch (e) {
-                    console.error('Ошибка загрузки сохранения:', e);
-                    return false;
-                }
-            }
-            return false;
-        }
-        
-        // Сохранение игры
-        function saveGame() {
-            try {
-                localStorage.setItem('laBertoClicker', JSON.stringify(gameState));
-                updateLastSaveTime();
-                return true;
-            } catch (e) {
-                console.error('Ошибка сохранения:', e);
-                return false;
-            }
-        }
-        
-        // Обновление времени последнего сохранения
-        function updateLastSaveTime() {
-            const lastSaveElement = document.getElementById('lastSave');
-            if (lastSaveElement) {
-                const now = new Date();
-                lastSaveElement.textContent = now.toLocaleTimeString();
-            }
-        }
-        
-        // Сброс прогресса
-        function resetProgress() {
-            if (confirm('Вы уверены, что хотите сбросить весь прогресс? Это действие нельзя отменить.')) {
-                gameState = {
-                    score: 0,
-                    totalClicks: 0,
-                    pointsFromClicks: 0,
-                    pointsFromAuto: 0,
-                    criticalHits: 0,
-                    playTime: 0,
-                    totalPoints: 0,
-                    clickPower: 1,
-                    autoClickers: 0,
-                    autoClickPower: 1,
-                    globalMultiplier: 1,
-                    colorScheme: 'purple',
-                    upgrades: {
-                        clickPower1: { owned: false },
-                        clickPower2: { owned: false },
-                        clickPower3: { owned: false },
-                        autoClicker1: { owned: false },
-                        autoClicker2: { owned: false },
-                        autoClicker3: { owned: false },
-                        clickStorm: { progress: 0 },
-                        criticalHit: { progress: 0 },
-                        goldRush: { progress: 0 },
-                        infinityClick: { progress: 0 }
-                    }
-                };
-                
-                // Сбрасываем выбранный цвет
-                document.querySelectorAll('.color-option').forEach(option => {
-                    option.classList.remove('selected');
-                    if (option.dataset.color === 'purple') {
-                        option.classList.add('selected');
-                    }
-                });
-                
-                applyColorScheme('purple');
-                saveGame();
-                updateUI();
-                
-                // Показываем сообщение об успешном сбросе
-                alert('Прогресс успешно сброшен!');
-            }
-        }
-        
-        // Применение цветовой схемы
-        function applyColorScheme(scheme) {
-            const colors = colorSchemes[scheme];
-            if (!colors) return;
-            
-            document.documentElement.style.setProperty('--primary', colors.primary);
-            document.documentElement.style.setProperty('--secondary', colors.secondary);
-            document.documentElement.style.setProperty('--accent', colors.accent);
-            
-            gameState.colorScheme = scheme;
-            saveGame();
-        }
-        
-        // Премиум улучшения
-        const premiumUpgrades = {
-            clickStorm: { 
-                cost: 25000, 
-                maxProgress: 100, 
-                effect: () => { gameState.autoClickPower *= 2; gameState.globalMultiplier *= 1.1; },
-                progressElement: null
-            },
-            criticalHit: { 
-                cost: 15000, 
-                maxProgress: 100, 
-                effect: () => { gameState.globalMultiplier *= 1.2; },
-                progressElement: null
-            },
-            goldRush: { 
-                cost: 50000, 
-                maxProgress: 100, 
-                effect: () => { gameState.globalMultiplier *= 1.25; },
-                progressElement: null
-            },
-            infinityClick: { 
-                cost: 100000, 
-                maxProgress: 100, 
-                effect: () => { gameState.autoClickPower *= 10; gameState.globalMultiplier *= 1.5; },
-                progressElement: null
-            }
-        };
-        
-        // Улучшения
-        const upgrades = {
-            clickPower1: { cost: 100, effect: () => { gameState.clickPower += 1; } },
-            clickPower2: { cost: 500, effect: () => { gameState.clickPower *= 2; } },
-            clickPower3: { cost: 2500, effect: () => { gameState.clickPower *= 3; } },
-            autoClicker1: { cost: 250, effect: () => { gameState.autoClickers += 1; } },
-            autoClicker2: { cost: 1250, effect: () => { gameState.autoClickers += 2; } },
-            autoClicker3: { cost: 6250, effect: () => { gameState.autoClickers += 5; } },
-            ...premiumUpgrades
-        };
-        
-        // Элементы интерфейса
-        const scoreElement = document.getElementById('score');
-        const clickButton = document.getElementById('clickButton');
-        const perClickStat = document.getElementById('perClickStat');
-        const perSecondStat = document.getElementById('perSecondStat');
-        const multiplierStat = document.getElementById('multiplierStat');
-        const totalMultiplierElement = document.getElementById('totalMultiplier');
-        const totalPointsElement = document.getElementById('totalPoints');
-        const totalClicksElement = document.getElementById('totalClicks');
-        const pointsFromClicksElement = document.getElementById('pointsFromClicks');
-        const pointsFromAutoElement = document.getElementById('pointsFromAuto');
-        const criticalHitsElement = document.getElementById('criticalHits');
-        const playTimeElement = document.getElementById('playTime');
-        
-        // Инициализация прогресс баров премиум улучшений
-        premiumUpgrades.clickStorm.progressElement = document.getElementById('clickStormProgress');
-        premiumUpgrades.criticalHit.progressElement = document.getElementById('criticalHitProgress');
-        premiumUpgrades.goldRush.progressElement = document.getElementById('goldRushProgress');
-        premiumUpgrades.infinityClick.progressElement = document.getElementById('infinityClickProgress');
-        
-        // Табы
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                tab.classList.add('active');
-                const tabContent = document.getElementById(`${tab.dataset.tab}-tab`);
-                tabContent.classList.add('active');
-                
-                // Анимация при переключении вкладок
-                tabContent.style.animation = 'none';
-                setTimeout(() => {
-                    tabContent.style.animation = 'fadeIn 0.3s ease-out';
-                }, 10);
-            });
-        });
-        
-        // Выбор цвета
-        document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', () => {
-                document.querySelectorAll('.color-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                option.classList.add('selected');
-                applyColorScheme(option.dataset.color);
-            });
-        });
-        
-        // Сброс прогресса
-        document.getElementById('resetProgress').addEventListener('click', resetProgress);
-        
-        // Основной клик
-        clickButton.addEventListener('click', (e) => {
-            // Создаем эффект клика
-            createClickEffect(e);
-            
-            gameState.totalClicks++;
-            let points = gameState.clickPower;
-            
-            // Проверка на критический удар
-            if (gameState.upgrades.criticalHit.progress >= premiumUpgrades.criticalHit.maxProgress && Math.random() < 0.1) {
-                points *= 5;
-                gameState.criticalHits++;
-                // Анимация для критического удара
-                scoreElement.style.animation = 'none';
-                setTimeout(() => {
-                    scoreElement.style.animation = 'bounce 0.5s';
-                }, 10);
-            }
-            
-            // Применяем глобальный множитель
-            points = Math.floor(points * gameState.globalMultiplier);
-            
-            gameState.score += points;
-            gameState.pointsFromClicks += points;
-            gameState.totalPoints += points;
-            updateUI();
-            saveGame();
-            
-            // Анимация кнопки
-            clickButton.style.animation = 'none';
-            setTimeout(() => {
-                clickButton.style.animation = 'pulse 2s infinite';
-            }, 100);
-        });
-        
-        // Функция создания эффекта клика
-        function createClickEffect(e) {
-            const effect = document.createElement('div');
-            effect.className = 'click-effect';
-            effect.style.left = `${e.clientX}px`;
-            effect.style.top = `${e.clientY}px`;
-            document.body.appendChild(effect);
-            
-            // Удаляем эффект после анимации
-            setTimeout(() => {
-                effect.remove();
-            }, 800);
-        }
-        
-        // Покупка улучшений
-        Object.keys(upgrades).forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    const upgrade = upgrades[id];
-                    
-                    // Для премиум улучшений
-                    if (id in premiumUpgrades) {
-                        const progress = gameState.upgrades[id].progress || 0;
-                        if (gameState.score >= upgrade.cost && progress < upgrade.maxProgress) {
-                            gameState.score -= upgrade.cost;
-                            gameState.upgrades[id].progress = progress + 1;
-                            updatePremiumProgress(id);
-                            
-                            // Анимация при покупке улучшения
-                            btn.parentElement.style.animation = 'none';
-                            setTimeout(() => {
-                                btn.parentElement.style.animation = 'bounce 0.5s';
-                            }, 10);
-                            
-                            // Если достигнут максимум - активируем эффект
-                            if (gameState.upgrades[id].progress >= upgrade.maxProgress) {
-                                upgrade.effect();
-                                btn.disabled = true;
-                                btn.textContent = "Активировано!";
-                            }
-                            
-                            updateUI();
-                            saveGame();
-                        }
-                    } 
-                    // Для обычных улучшений
-                    else if (!gameState.upgrades[id].owned && gameState.score >= upgrade.cost) {
-                        gameState.score -= upgrade.cost;
-                        gameState.upgrades[id].owned = true;
-                        upgrade.effect();
-                        btn.disabled = true;
-                        btn.textContent = "Куплено";
-                        
-                        // Анимация при покупке улучшения
-                        btn.parentElement.style.animation = 'none';
-                        setTimeout(() => {
-                            btn.parentElement.style.animation = 'bounce 0.5s';
-                        }, 10);
-                        
-                        updateUI();
-                        saveGame();
-                    }
-                });
-            }
-        });
-        
-        // Обновление прогресса премиум улучшений
-        function updatePremiumProgress(id) {
-            const upgrade = premiumUpgrades[id];
-            const progress = gameState.upgrades[id].progress || 0;
-            const progressPercent = (progress / upgrade.maxProgress) * 100;
-            upgrade.progressElement.style.width = `${progressPercent}%`;
-            
-            // Обновляем текст кнопки
-            const btn = document.getElementById(id);
-            if (progress < upgrade.maxProgress) {
-                btn.textContent = `Улучшить (${progress}/${upgrade.maxProgress})`;
-            }
-        }
-        
-        // Автокликеры
-        setInterval(() => {
-            if (gameState.autoClickers > 0) {
-                let points = gameState.autoClickers * gameState.autoClickPower;
-                
-                // Применяем глобальный множитель
-                points = Math.floor(points * gameState.globalMultiplier);
-                
-                // Учет золотой лихорадки
-                if (gameState.upgrades.goldRush.progress >= premiumUpgrades.goldRush.maxProgress) {
-                    points = Math.floor(points * 1.25);
-                }
-                
-                gameState.score += points;
-                gameState.pointsFromAuto += points;
-                gameState.totalPoints += points;
-                updateUI();
-                
-                // Автосохранение каждые 10 секунд
-                if (gameState.playTime % 10 === 0) {
-                    saveGame();
-                }
-            }
-        }, gameState.upgrades.clickStorm.progress >= premiumUpgrades.clickStorm.maxProgress ? 500 : 1000);
-        
-        // Таймер игры
-        setInterval(() => {
-            gameState.playTime++;
-            const minutes = Math.floor(gameState.playTime / 60);
-            const seconds = gameState.playTime % 60;
-            playTimeElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        }, 1000);
-        
-        // Обновление интерфейса
-        function updateUI() {
-            // Форматируем числа с разделителями тысяч
-            const formatNumber = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            
-            scoreElement.textContent = `${formatNumber(gameState.score)} очков`;
-            perClickStat.textContent = formatNumber(Math.floor(gameState.clickPower * gameState.globalMultiplier));
-            perSecondStat.textContent = formatNumber(Math.floor(gameState.autoClickers * gameState.autoClickPower * gameState.globalMultiplier));
-            multiplierStat.textContent = `${gameState.globalMultiplier.toFixed(1)}x`;
-            totalMultiplierElement.textContent = `${gameState.globalMultiplier.toFixed(1)}x`;
-            
-            totalPointsElement.textContent = formatNumber(gameState.pointsFromClicks + gameState.pointsFromAuto);
-            totalClicksElement.textContent = formatNumber(gameState.totalClicks);
-            pointsFromClicksElement.textContent = formatNumber(gameState.pointsFromClicks);
-            pointsFromAutoElement.textContent = formatNumber(gameState.pointsFromAuto);
-            criticalHitsElement.textContent = formatNumber(gameState.criticalHits);
-            
-            // Обновляем доступность улучшений
-            Object.keys(upgrades).forEach(id => {
-                const btn = document.getElementById(id);
-                if (btn) {
-                    // Для премиум улучшений
-                    if (id in premiumUpgrades) {
-                        const progress = gameState.upgrades[id].progress || 0;
-                        btn.disabled = gameState.score < upgrades[id].cost || progress >= premiumUpgrades[id].maxProgress;
-                    } 
-                    // Для обычных улучшений
-                    else if (!gameState.upgrades[id].owned) {
-                        btn.disabled = gameState.score < upgrades[id].cost;
-                    }
-                }
-            });
-        }
-        
-        // Кнопка закрытия
-        tg.MainButton.setText("Закрыть игру");
-        tg.MainButton.show();
-        tg.MainButton.onClick(() => {
-            saveGame();
-            tg.close();
-        });
-        
-        // Инициализация игры
-        function initGame() {
-            // Загружаем сохраненную игру
-            const loaded = loadGame();
-            
-            // Если игра не загружена, применяем стандартные настройки
-            if (!loaded) {
-                applyColorScheme('purple');
-            }
-            
-            // Обновляем интерфейс
-            updateUI();
-            
-            // Восстанавливаем выбранный цвет
-            document.querySelectorAll('.color-option').forEach(option => {
-                option.classList.remove('selected');
-                if (option.dataset.color === gameState.colorScheme) {
-                    option.classList.add('selected');
-                }
-            });
-            
-            // Восстанавливаем состояние улучшений
-            Object.keys(gameState.upgrades).forEach(id => {
-                if (id in premiumUpgrades) {
-                    updatePremiumProgress(id);
-                    const btn = document.getElementById(id);
-                    if (btn && gameState.upgrades[id].progress >= premiumUpgrades[id].maxProgress) {
-                        btn.disabled = true;
-                        btn.textContent = "Активировано!";
-                    }
-                } else {
-                    const btn = document.getElementById(id);
-                    if (btn && gameState.upgrades[id].owned) {
-                        btn.disabled = true;
-                        btn.textContent = "Куплено";
-                    }
-                }
-            });
-        }
-        
-        // Запускаем игру
-        initGame();
-    </script>
-</body>
-</html>
-  
+              
